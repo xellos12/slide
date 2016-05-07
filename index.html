@@ -119,7 +119,11 @@ $(function(){
         console.log(slide.setting.total); // 총 배열의 합을 구한다.
         console.log(slide.btn);
 
-        return target.css({'width' : slide.setting.total - (slide.btn * 2), 'left' : slide.btn}).parent().css({'height' : slide.setting.height}); // 총 배열의 합을 target 인자 width값을 설정한다.
+        return target.css({'width' : slide.setting.total - (slide.btn * 2), 'left' : slide.btn}).parent().css({'height' : slide.setting.height}).find(target).find('> *:first').addClass('on'); // 총 배열의 합을 target 인자 width값을 설정한다.
+    };
+
+    slide.animate = function(target){
+
     };
 
     console.log(slide.setting($('div.slide > ul')));
