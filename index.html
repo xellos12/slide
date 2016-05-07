@@ -91,6 +91,11 @@
             <li>메뉴552</li>
             <li>메뉴4412333</li>
         </ul>
+
+        <div class="btn">
+            <button class="prev">왼쪽</button>
+            <button class="next">오른쪽</button>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -102,6 +107,7 @@ $(function(){
         slide.setting.total = 0;
         slide.setting.width = [];
         slide.setting.height = target.outerHeight();
+        slide.btn = target.parent().find('.btn > button').outerWidth();
 
         for (var i = 0; i < target.find('> li').length; i++){
             // console.log(target.find('li').eq(i).outerWidth());
@@ -111,8 +117,9 @@ $(function(){
 
         console.log(slide.setting.width); // 배열에다가 루프값을 삽입한다.
         console.log(slide.setting.total); // 총 배열의 합을 구한다.
+        console.log(slide.btn);
 
-        return target.css({'width' : slide.setting.total}).parent().css({'height' : slide.setting.height}); // 총 배열의 합을 target 인자 width값을 설정한다.
+        return target.css({'width' : slide.setting.total - (slide.btn * 2), 'left' : slide.btn}).parent().css({'height' : slide.setting.height}); // 총 배열의 합을 target 인자 width값을 설정한다.
     };
 
     console.log(slide.setting($('div.slide > ul')));
