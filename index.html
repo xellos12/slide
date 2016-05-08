@@ -100,33 +100,38 @@
 </div>
 <script type="text/javascript">
 $(function(){
-    var slide = {};
+	var slide = {};
 
-    slide.setting = function(target){
-        slide.setting.width,
-        slide.setting.total = 0;
-        slide.setting.width = [];
-        slide.setting.height = target.outerHeight();
-        slide.btn = target.parent().find('.btn > button').outerWidth();
+	slide.setting = function(target){
+		slide.setting.width,
+		slide.setting.total = 0;
+		slide.setting.width = [];
+		slide.setting.height = target.outerHeight();
+		slide.btn = target.parent().find('.btn > button').outerWidth();
 
-        for (var i = 0; i < target.find('> li').length; i++){
-            // console.log(target.find('li').eq(i).outerWidth());
-            slide.setting.width[i] = parseInt(target.find('li').eq(i).outerWidth(true));
-            slide.setting.total += slide.setting.width[i];
-        };
+		for (var i = 0; i < target.find('> li').length; i++){
+			// console.log(target.find('li').eq(i).outerWidth());
+			slide.setting.width[i] = parseInt(target.find('li').eq(i).outerWidth(true));
+			slide.setting.total += slide.setting.width[i];
+		};
 
-        console.log(slide.setting.width); // 배열에다가 루프값을 삽입한다.
-        console.log(slide.setting.total); // 총 배열의 합을 구한다.
-        console.log(slide.btn);
+		console.log(slide.setting.width); // 배열에다가 루프값을 삽입한다.
+		console.log(slide.setting.total); // 총 배열의 합을 구한다.
+		console.log(slide.btn);
 
-        return target.css({'width' : slide.setting.total - (slide.btn * 2), 'left' : slide.btn}).parent().css({'height' : slide.setting.height}).find(target).find('> *:first').addClass('on'); // 총 배열의 합을 target 인자 width값을 설정한다.
-    };
+		return target.css({'width' : slide.setting.total, 'left' : slide.btn}).parent().css({'height' : slide.setting.height}).find(target).find('> *:first').addClass('on'); // 총 배열의 합을 target 인자 width값을 설정한다.
+	};
 
-    slide.animate = function(target){
+	slide.animate = function(target, on, className){
+		target.animate({'left' : '-=' + (slide.setting.width[on.next().index()])}).parents(target).find('.on').removeClass('on').next().addClass('on');
+	};
 
-    };
+	console.log(slide.setting($('div.slide > ul')));
 
-    console.log(slide.setting($('div.slide > ul')));
+	$('.slide').find('button').click(function(){
+		// slide.animate($(this).parents('.slide').find('> ul'), $('.slide').find('> ul > .on'), 'prev') ? alert(1) : alert(2); // 2개 다 false가 뜸.
+		// slide.animate($(this).parents('.slide').find('> ul'), $('.slide').find('> ul > .on'));
+	});
 });
 </script>
 </body>
